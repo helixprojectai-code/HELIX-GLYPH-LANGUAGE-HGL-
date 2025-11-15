@@ -1,11 +1,11 @@
 # HELIX GLYPH LANGUAGE (HGL)
 
-## Unified Runbook — v1.2-beta-K CURRENT (Merged, Khronos-Enhanced)
+## Unified Runbook — v1.3-beta-K CURRENT (Merged, Khronos-Enhanced)
 
 ** SPDX-License-Identifier: Apache-2.0 SPDX-FileCopyrightText: 2025 Helix AI Innovations Inc.
 
-**Document ID:** HGL-RUNBOOK-UNIFIED-v1.2-BETA-K  
-**Spec Version:** 1.2-beta-K (Helix Core Ethos-aligned extensions)  
+**Document ID:** HGL-RUNBOOK-UNIFIED-v1.3-BETA-K  
+**Spec Version:** 1.3-beta-K (Helix Core Ethos-aligned extensions)  
 **Doc Status:** Beta — Human-First Reference (Full Lexicon)  
 **Date:** 2025-10-13  
 **TTD Layer:** C2 "Expressive Protocols"  
@@ -80,6 +80,7 @@ IDs • emoji • name • ASCII alias • one-line semantics
 | HGL-CORE-013 | 📊 | Analytics | ANALYTICS | Metrics/telemetry/measure |
 | HGL-CORE-014 | 💬 | Dialogue | DIALOGUE | Human/agent discussion/QA |
 | HGL-CORE-015 | 🤝 | Collaborate | COLLAB | Multi-party coordination/hand-off |
+| HGL-CORE-016 | 🎭 | Culture | CULTURE | Cultural/ritual framing; non-binding context |
 
 ### 1.2 Operational (20)
 
@@ -193,7 +194,10 @@ IDs • emoji • name • ASCII alias • one-line semantics
 | ⚡ | 🛡️ | −0.6 | CONFLICT | Optimization vs safety conflict |
 | 🔄 | ✅ | +0.8 | SEQUENCE | Iteration requires validation checkpoint |
 | 🔍 | 🔍 | −0.8 | ANTIPATTERN | Redundant depth → paralysis flag |
-
+| 🎭 | 💬 | +0.7 | AMPLIFY | Cultural framing enriches dialogue context |
+| 🎭 | 🤝 | +0.6 | AMPLIFY | Ritual context aids multi-party coordination |
+| 🎭 | 🛡️ | −0.3 | CAUTION | Cultural norms should not override active risk controls |
+| 🔍 | 🎭 | +0.5 | AMPLIFY | Investigation can include analysis of cultural context |
 ---
 
 ## 5️⃣ Anti-Patterns
