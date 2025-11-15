@@ -106,6 +106,7 @@ IDs • emoji • name • ASCII alias • one-line semantics
 | HGL-OP-018 | 🗓️ | Schedule | SCHEDULE | Plan/milestones |
 | HGL-OP-019 | 🧾 | Policy | POLICY | Rules/compliance |
 | HGL-OP-020 | 📣 | Notify | NOTIFY | Alert/escalation |
+| HGL-OP-021 | 🧊 | ColdStart | COLDSTART | Explicit ICE CUBE state: no prior context; re-ground required
 
 ### 1.3 Advanced (15)
 
