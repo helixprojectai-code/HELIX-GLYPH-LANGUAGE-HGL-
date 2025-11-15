@@ -61,7 +61,7 @@ This unified document integrates glyph specification, dictionary, error taxonomy
 
 IDs • emoji • name • ASCII alias • one-line semantics
 
-### 1.1 Core (15)
+### 1.1 Core (16)
 
 | ID | Glyph | Name | Alias | Semantics |
 |---|---|---|---|---|
@@ -82,7 +82,7 @@ IDs • emoji • name • ASCII alias • one-line semantics
 | HGL-CORE-015 | 🤝 | Collaborate | COLLAB | Multi-party coordination/hand-off |
 | HGL-CORE-016 | 🎭 | Culture | CULTURE | Cultural/ritual framing; non-binding context |
 
-### 1.2 Operational (20)
+### 1.2 Operational (21)
 
 | ID | Glyph | Name | Alias | Semantics |
 |---|---|---|---|---|
