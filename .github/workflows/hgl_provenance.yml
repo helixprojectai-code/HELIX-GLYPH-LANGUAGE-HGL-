@@ -1,0 +1,96 @@
+name: HGL Provenance Generator
+
+on:
+  push:
+    paths:
+      - 'tools/generate_provenance.py'
+      - '.github/workflows/hgl_provenance.yml'
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate-provenance-tool:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: 🛠️ Setup Test Environment
+      run: |
+        # Create a mock environment to simulate a real HGL build
+        mkdir -p src tools releases/HGL-v1.2-beta.1
+        
+        # Create dummy inputs
+        echo "grammar definition" > src/grammar.hgl
+        echo "policy logic" > src/policy.rego
+        
+        # Create dummy outputs (what the compiler would produce)
+        echo "compiled artifact" > releases/HGL-v1.2-beta.1/output.json
+        echo "verification log" > releases/HGL-v1.2-beta.1/verify.log
+        
+        # Move the script to the right place if not already there
+        # (Your repo structure seems to have it in tools/)
+        if [ -f tools/generate_provenance.py ]; then
+          echo "✅ Script found in tools/"
+        else
+          # If testing locally before directory structure is final
+          echo "⚠ Moving script to tools/"
+          mkdir -p tools
+          cp generate_provenance.py tools/
+        fi
+        
+        # Create a mock policy script so evaluation doesn't fail
+        echo '#!/bin/bash' > tools/verify_and_eval.sh
+        echo 'echo "=== Gate: Syntax Check ==="' >> tools/verify_and_eval.sh
+        echo 'echo "PASS: Syntax is valid"' >> tools/verify_and_eval.sh
+        chmod +x tools/verify_and_eval.sh
+
+    - name: 🚀 Run Generator
+      run: |
+        python3 tools/generate_provenance.py \
+          --version 1.2-beta.1 \
+          --release-dir releases/HGL-v1.2-beta.1 \
+          --input-dir src \
+          --tools-dir tools
+
+    - name: 🔍 Audit Manifest Structure
+      id: audit
+      run: |
+        MANIFEST="releases/HGL-v1.2-beta.1/provenance.json"
+        
+        if [ ! -f "$MANIFEST" ]; then
+          echo "❌ Provenance manifest not generated."
+          exit 1
+        fi
+        
+        echo "📄 Manifest Content:"
+        cat $MANIFEST
+        
+        # Verify Key Fields using Python for robust JSON parsing
+        python3 -c "
+import json, sys
+with open('$MANIFEST') as f:
+    data = json.load(f)
+    
+errors = []
+if 'build_utc' not in data: errors.append('Missing build_utc')
+if 'git' not in data: errors.append('Missing git info')
+if data['policy']['status'] != 'pass': errors.append('Policy status check failed')
+if len(data['inputs']) < 1: errors.append('No inputs recorded')
+
+if errors:
+    print('❌ Validation Errors:', errors)
+    sys.exit(1)
+else:
+    print('✅ Manifest structure verified.')
+"
+
+    - name: 📦 Archive Manifest
+      uses: actions/upload-artifact@v4
+      with:
+        name: provenance-manifest
+        path: releases/HGL-v1.2-beta.1/provenance.json
