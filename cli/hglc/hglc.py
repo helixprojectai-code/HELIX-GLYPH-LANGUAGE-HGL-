@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys, json, hashlib, argparse
+
 ALLOWED_INTENT={"approve","deny","request"}
 ALLOWED_ACT={"access","upsert","execute"}
 ALLOWED_KIND={"Human","IAD","CLS"}
