@@ -1,0 +1,78 @@
+name: HGL Compiler Logic
+
+on:
+  push:
+    paths:
+      - 'cli/hglc/**'
+      - '.github/workflows/hgl_compiler.yml'
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate-grammar:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: 🐍 Syntax Check
+      run: |
+        # Compiles the script to bytecode to catch syntax errors immediately
+        python3 -m py_compile cli/hglc/hglc.py
+        echo "✅ Python syntax is valid."
+
+    - name: 🧪 Create Test Artifact (The Sentence)
+      run: |
+        # Create a valid HGL sentence based on the ALLOWED_* sets in code
+        # SUBJ:Human:Admin INTENT:approve ACT:upsert OBJ:ledger/main_chain CONSENT:write@2025-12-31
+        echo "SUBJ:Human:Admin INTENT:approve ACT:upsert OBJ:ledger/main_chain CONSENT:write@2025-12-31" > source_input.hgl
+        
+        echo "📄 Source Input:"
+        cat source_input.hgl
+
+    - name: ⚙️ Test Compile Command
+      run: |
+        # Run the compiler logic
+        python3 cli/hglc/hglc.py compile source_input.hgl > compiled_output.json
+        
+        # Verify output exists and has content
+        if [ ! -s compiled_output.json ]; then
+          echo "❌ Compiler produced empty output."
+          exit 1
+        fi
+        
+        echo "✅ Compilation successful. Output:"
+        cat compiled_output.json
+
+    - name: ⚖️ Test Canonicalization & Hashing
+      run: |
+        # Run the hash command on the JSON we just produced
+        HASH=$(python3 cli/hglc/hglc.py hash compiled_output.json)
+        
+        echo "🔐 Generated Hash: $HASH"
+        
+        # Verify it looks like a SHA256 (64 hex chars)
+        if [[ $HASH =~ ^[0-9a-f]{64}$ ]]; then
+          echo "✅ Hash format valid."
+        else
+          echo "❌ Invalid hash format generated."
+          exit 1
+        fi
+
+    - name: 📄 Verify JSON Structure
+      run: |
+        # Simple grep check to ensure key fields exist in the JSON
+        if grep -q "COOP_SENTENCE" compiled_output.json; then
+          echo "✅ Sentence Type confirmed."
+        else
+          echo "❌ Output missing COOP_SENTENCE flag."
+          exit 1
+        fi
