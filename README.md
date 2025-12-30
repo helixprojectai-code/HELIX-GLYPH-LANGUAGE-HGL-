@@ -4,6 +4,24 @@
 
 ** SPDX-License-Identifier: Apache-2.0 SPDX-FileCopyrightText: 2025 Helix AI Innovations Inc.
 
+<div align="center">
+
+<!-- TIER 1: STATUS (The Pulse) -->
+[![CI: Compiler](https://github.com/helixprojectai-code/HELIX-GLYPH-LANGUAGE-HGL-/actions/workflows/hgl_compiler.yml/badge.svg)](https://github.com/helixprojectai-code/HELIX-GLYPH-LANGUAGE-HGL-/actions/workflows/hgl_compiler.yml)
+[![CI: Provenance](https://github.com/helixprojectai-code/HELIX-GLYPH-LANGUAGE-HGL-/actions/workflows/hgl_provenance.yml/badge.svg)](https://github.com/helixprojectai-code/HELIX-GLYPH-LANGUAGE-HGL-/actions/workflows/hgl_provenance.yml)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+
+<!-- TIER 2: SPECIFICATION (The Logic) -->
+![Version](https://img.shields.io/badge/Spec-v1.3--beta--K-TEAL?style=for-the-badge&labelColor=black)
+![Grammar](https://img.shields.io/badge/Grammar-BNF-orange?style=for-the-badge)
+![Resonance](https://img.shields.io/badge/Resonance-HARMONIC-purple?style=for-the-badge)
+
+<!-- TIER 3: GOVERNANCE (The Ethos) -->
+![Status](https://img.shields.io/badge/Status-SEMANTIC_STANDARD-008080?style=for-the-badge)
+![Ethos](https://img.shields.io/badge/Ethos-HUMAN--FIRST-success?style=for-the-badge)
+
+</div>
+
 **Document ID:** HGL-RUNBOOK-UNIFIED-v1.3-BETA-K  
 **Spec Version:** 1.3-beta-K (Helix Core Ethos-aligned extensions)  
 **Doc Status:** Beta — Human-First Reference (Full Lexicon)  
