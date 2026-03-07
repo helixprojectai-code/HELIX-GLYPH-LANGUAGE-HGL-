@@ -81,8 +81,11 @@ IDs • emoji • name • ASCII alias • one-line semantics
 
 ### 1.1 Core (16)
 
+
 | ID | Glyph | Name | Alias | Semantics |
 |---|---|---|---|---|
+| HGL-CORE--01 | 🦪 | OYSTER | Unlabeled emergence that becomes canonical through filing.
+| HGL-CORE-000 | 🦆 | DUCK | The constant. The unobservable observer. Quacks for sats.
 | HGL-CORE-001 | 🔍 | Investigation | INVESTIGATE | Analyze/inspect evidence/patterns |
 | HGL-CORE-002 | 💡 | Insight | INSIGHT | Propose novel synthesis/explanation |
 | HGL-CORE-003 | 🔄 | Iteration | ITERATE | Repeat with refinement toward goal |
