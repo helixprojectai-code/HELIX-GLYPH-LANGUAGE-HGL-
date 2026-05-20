@@ -19,14 +19,16 @@
     "category": {
       "type": "string",
       "enum": [
-        "Temporal",
-        "Syntax",
-        "Security",
-        "Ethics",
-        "Custody",
-        "Integration",
-        "Validation",
-        "Other"
+        "SchemaValidation",
+        "SignatureVerification",
+        "RenderFallback",
+        "VersionMismatch",
+        "RateLimiting",
+        "SandboxViolation",
+        "Authorization",
+        "NetworkIO",
+        "Internal",
+        "UserInput"
       ]
     },
     "severity": {
